@@ -1,0 +1,251 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BharatYatra | Discover India</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top transition">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="#">BHARAT<span>YATRA</span></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#destinations">Destinations</a></li>
+                <li class="nav-item"><a class="nav-link" href="#packages">Packages</a></li>
+                <li class="nav-item auth-area">
+                    <a class="nav-link btn-login ms-lg-3" href="#" data-bs-toggle="modal" data-bs-target="#loginModal" id="authButton">Login</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<header class="hero-section">
+    <div class="container text-center text-white">
+        <h1 class="display-3 fw-bold mb-3" data-aos="fade-up">Explore the Spirit of India</h1>
+        <p class="lead mb-5" data-aos="fade-up" data-aos-delay="200">From the Himalayas to Kanyakumari, your adventure starts here.</p>
+        
+        <div class="search-box p-4 bg-white rounded-pill shadow-lg mx-auto" data-aos="zoom-in" data-aos-delay="400">
+            <form class="row g-2 align-items-center">
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <span class="input-group-text bg-transparent border-0"><i class="fas fa-map-marker-alt text-danger"></i></span>
+                        <input type="text" id="whereInput" list="placesList" class="form-control border-0" placeholder="Where to go?" autocomplete="off">
+                        <datalist id="placesList">
+                            <option value="Agra"></option>
+                            <option value="Jaipur"></option>
+                            <option value="Munnar"></option>
+                            <option value="Himalayan Retreat"></option>
+                            <option value="Kerala Backwaters"></option>
+                            <option value="Rajasthan Royal Tour"></option>
+                            <option value="Goa Beach Escape"></option>
+                        </datalist>
+                    </div>
+                </div>
+                <div class="col-md-3 border-start">
+                    <input type="date" class="form-control border-0">
+                </div>
+                <div class="col-md-3 border-start">
+                    <select class="form-select border-0">
+                        <option>Travel Type</option>
+                        <option>Adventure</option>
+                        <option>Religious</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="button" id="searchBtn" class="btn btn-primary rounded-pill w-100 py-2">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</header>
+
+<section id="destinations" class="py-5">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-end mb-4" data-aos="fade-right">
+            <div>
+                <h6 class="text-primary fw-bold text-uppercase">Top Picks</h6>
+                <h2 class="fw-bold">Popular in India</h2>
+            </div>
+            <a href="#" class="text-decoration-none">View All <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-4" data-aos="flip-left">
+                <div class="dest-card">
+                    <img src="https://d1bv4heaa2n05k.cloudfront.net/user-images/1452677560455/shutterstock-104152499_main_1452677571204.jpeg" alt="Agra">
+                    <div class="dest-overlay">
+                        <div class="badge bg-warning text-dark mb-2">Best Seller</div>
+                        <h4 class="text-white">The Taj Mahal, Agra</h4>
+                        <a href="#" class="btn btn-sm btn-light mt-2 btn-explore" data-place="The Taj Mahal, Agra" data-details="An iconic 17th-century mausoleum built by Mughal Emperor Shah Jahan.">Explore Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="flip-left" data-aos-delay="200">
+                <div class="dest-card">
+                    <img src="https://static.toiimg.com/thumb/115224983/Jaipur.jpg?width=636&height=358&resize=4" alt="Jaipur">
+                    <div class="dest-overlay">
+                        <h4 class="text-white">Pink City, Jaipur</h4>
+                        <a href="#" class="btn btn-sm btn-light mt-2 btn-explore" data-place="Pink City, Jaipur" data-details="Historic palaces, vibrant bazaars, and pink-hued architecture.">Explore Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="flip-left" data-aos-delay="400">
+                <div class="dest-card">
+                    <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800" alt="Kerala">
+                    <div class="dest-overlay">
+                        <h4 class="text-white">Munnar, Kerala</h4>
+                        <a href="#" class="btn btn-sm btn-light mt-2 btn-explore" data-place="Munnar, Kerala" data-details="Lush tea gardens and misty hill stations — perfect for nature lovers.">Explore Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="packages" class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="fw-bold">Exclusive Tour Packages</h2>
+            <p class="text-muted">Best deals for your next spiritual or adventurous journey</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3" data-aos="zoom-in-up">
+                <div class="card package-card border-0 shadow-sm">
+                    <div class="position-relative">
+                        <img src="https://images.unsplash.com/photo-1514222134-b57cbb8ce073?auto=format&fit=crop&w=500" class="card-img-top" alt="Himalayas">
+                        <span class="price-tag">₹15,999</span>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="fw-bold">Himalayan Retreat</h5>
+                        <p class="small text-muted"><i class="far fa-clock"></i> 5 Days / 4 Nights</p>
+                        <button class="btn btn-outline-primary w-100 btn-view" data-place="Himalayan Retreat" data-price="₹15,999" data-duration="5 Days / 4 Nights" data-description="A rejuvenating mountain retreat in the Himalayas.">View Deal</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3" data-aos="zoom-in-up" data-aos-delay="200">
+                <div class="card package-card border-0 shadow-sm">
+                    <div class="position-relative">
+                        <img src="https://www.tripsavvy.com/thmb/UoylMLyzOBPdDp34ForEiJd9m3s=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-522478216-5ab12c4e3de4230036949cee.jpg" class="card-img-top" alt="Kerala">
+                        <span class="price-tag">₹12,499</span>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="fw-bold">Kerala Backwaters</h5>
+                        <p class="small text-muted"><i class="far fa-clock"></i> 4 Days / 3 Nights</p>
+                        <button class="btn btn-outline-primary w-100 btn-view" data-place="Kerala Backwaters" data-price="₹12,499" data-duration="4 Days / 3 Nights" data-description="Houseboat cruises and serene backwater experiences.">View Deal</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3" data-aos="zoom-in-up" data-aos-delay="400">
+                <div class="card package-card border-0 shadow-sm">
+                    <div class="position-relative">
+                        <img src="https://www.toursandtaxi.com/wp-content/uploads/2020/09/royal-rajasthan-tour.jpg" class="card-img-top" alt="Rajasthan">
+                        <span class="price-tag">₹18,999</span>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="fw-bold">Rajasthan Royal Tour</h5>
+                        <p class="small text-muted"><i class="far fa-clock"></i> 7 Days / 6 Nights</p>
+                        <button class="btn btn-outline-primary w-100 btn-view" data-place="Rajasthan Royal Tour" data-price="₹18,999" data-duration="7 Days / 6 Nights" data-description="Explore palaces, forts, and royal hospitality across Rajasthan.">View Deal</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3" data-aos="zoom-in-up" data-aos-delay="600">
+                <div class="card package-card border-0 shadow-sm">
+                    <div class="position-relative">
+                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=500" class="card-img-top" alt="Goa">
+                        <span class="price-tag">₹9,999</span>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="fw-bold">Goa Beach Escape</h5>
+                        <p class="small text-muted"><i class="far fa-clock"></i> 3 Days / 2 Nights</p>
+                        <button class="btn btn-outline-primary w-100 btn-view" data-place="Goa Beach Escape" data-price="₹9,999" data-duration="3 Days / 2 Nights" data-description="Sun, sand, and vibrant beach life in Goa.">View Deal</button>
+                    </div>
+                </div>
+            </div>
+            </div>
+    </div>
+</section>
+
+<div class="modal fade" id="loginModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 glass-card">
+            <div class="modal-body p-5">
+                <div class="text-center mb-4">
+                    <h3 class="fw-bold">Welcome Back</h3>
+                    <p class="text-muted">Login to access your bookings</p>
+                </div>
+                <form id="loginForm">
+                    <div class="mb-3">
+                        <input type="text" id="nameInput" class="form-control rounded-pill" placeholder="Full Name">
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" id="emailInput" class="form-control rounded-pill" placeholder="Email Address" required>
+                    </div>
+                    <div class="mb-4">
+                        <input type="password" id="passwordInput" class="form-control rounded-pill" placeholder="Password" required>
+                    </div>
+                    <div class="mb-2 small text-muted">This is a demo login — no real authentication will occur.</div>
+                    <button type="submit" class="btn btn-primary w-100 rounded-pill py-2 shadow" id="loginSubmit">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Detail Modal for Explore/View Deal -->
+<div class="modal fade" id="detailModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0">
+      <div class="modal-header">
+        <h5 class="modal-title" id="detailModalLabel">Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p id="detailDescription" class="mb-3"></p>
+        <p><strong>Price:</strong> <span id="detailPrice"></span></p>
+        <p><strong>Duration:</strong> <span id="detailDuration"></span></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="bookNowBtn">Book Now</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Booking Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0">
+      <div class="modal-header">
+        <h5 class="modal-title">Booking Successful</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p id="successMessage">Your booking was successful.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="{% static 'js/script.js' %}"></script>
+<script>AOS.init({ duration: 1000, once: true });</script>
+</body>
+</html>
