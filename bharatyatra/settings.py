@@ -56,11 +56,22 @@ DATABASES = {
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 
-# Directory where static files are collected to
+# Directory where static files will be collected to
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# Additional locations of static files (for development)
+# Additional directories to look for static files (useful in development)
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
-# Enable WhiteNoise to serve static files efficiently
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesS_
+# Use WhiteNoise storage backend to serve compressed static files with cache busting
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Optional but recommended production security settings
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_HSTS_SECONDS = 3600
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
