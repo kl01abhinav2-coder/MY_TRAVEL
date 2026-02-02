@@ -3,15 +3,18 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'replace-this-with-a-secure-key'
-DEBUG = True
+# Load secret key from environment or fallback (not recommended for production)
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'replace-this-with-a-secure-key')
+
+# DEBUG should be False in production; can be set via env variable for flexibility
+DEBUG = os.getenv('DJANGO_DEBUG', 'False').lower() in ['true', '1', 'yes']
+
 ALLOWED_HOSTS = [
     "mytravel-production-7e8f.up.railway.app",
     ".railway.app",
     "localhost",
     "127.0.0.1",
 ]
-
 
 INSTALLED_APPS = [
     'django.contrib.staticfiles',
@@ -20,6 +23,8 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    # WhiteNoise middleware to serve static files in production
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.common.CommonMiddleware',
 ]
 
@@ -48,7 +53,14 @@ DATABASES = {
     }
 }
 
+# Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
+
+# Directory where static files are collected to
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Additional locations of static files (for development)
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# Enable WhiteNoise to serve static files efficiently
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesS_
