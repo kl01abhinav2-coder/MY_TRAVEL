@@ -1,1 +1,1 @@
-﻿web: sh -c "mkdir -p /app/staticfiles && python manage.py migrate --no-input && python manage.py collectstatic --no-input && gunicorn bharatyatra.wsgi --log-file - --bind 0.0.0.0:$PORT"
+﻿web: sh -c "mkdir -p /app/staticfiles && python manage.py migrate --no-input && python manage.py collectstatic --no-input && gunicorn bharatyatra.wsgi:application --bind 0.0.0.0:$PORT"
