@@ -14,6 +14,7 @@ ALLOWED_HOSTS = [
     ".railway.app",
     "localhost",
     "127.0.0.1",
+    "*",
 ]
 
 INSTALLED_APPS = [
@@ -66,10 +67,10 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Optional but recommended production security settings
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-SECURE_HSTS_SECONDS = 3600
+SECURE_SSL_REDIRECT = os.getenv('DJANGO_SECURE_SSL', 'True').lower() in ['true', '1', 'yes']
+SESSION_COOKIE_SECURE = os.getenv('DJANGO_SECURE_SSL', 'True').lower() in ['true', '1', 'yes']
+CSRF_COOKIE_SECURE = os.getenv('DJANGO_SECURE_SSL', 'True').lower() in ['true', '1', 'yes']
+SECURE_HSTS_SECONDS = 3600 if not DEBUG else 0
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
 
