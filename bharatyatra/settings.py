@@ -1,16 +1,20 @@
-from pathlib import Path
 import os
+from pathlib import Path
 
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECURITY
-SECRET_KEY = os.environ.get("SECRET_KEY", "unsafe-local-key")
-DEBUG = os.environ.get("DEBUG", "False") == "True"
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = os.environ.get("SECRET_KEY", "django-insecure-local-key-for-dev")
 
-# Use '*' for deployment to allow Railway's dynamic domain
+# SECURITY WARNING: don't run with debug turned on in production!
+# Set DEBUG to False on Railway by adding a Variable DEBUG=False
+DEBUG = os.environ.get("DEBUG", "True") == "True"
+
+# Allow all hosts for Railway deployment
 ALLOWED_HOSTS = ['*']
 
-# APPLICATIONS
+# Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -18,18 +22,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'main',
+    'main',  # Your app name
 ]
 
-# MIDDLEWARE
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # Positions is critical for static files
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # MUST stay right here
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'bharatyatra.urls'
@@ -52,6 +56,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'bharatyatra.wsgi.application'
 
+# Database
+# Using SQLite for now; Railway will keep it until the next deploy.
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -59,18 +65,37 @@ DATABASES = {
     }
 }
 
-# STATIC FILES (WhiteNoise Configuration)
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+# Password validation
+AUTH_PASSWORD_VALIDATORS = [
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',},
+]
 
-# Enables compression and unique hashing for browser caching
+# Internationalization
+LANGUAGE_CODE = 'en-us'
+TIME_ZONE = 'UTC'
+USE_I18N = True
+USE_TZ = True
+
+# --- STATIC FILES CONFIGURATION ---
+STATIC_URL = '/static/'
+
+# Where Django looks for static files during development
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+# Where collectstatic will put all files for production
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# WhiteNoise Storage (The key to fixing your alignment)
+# This version compresses files without renaming them, making it very stable.
 STORAGES = {
     "default": {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
     },
 }
 
