@@ -5,9 +5,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY
 SECRET_KEY = os.environ.get("SECRET_KEY", "unsafe-local-key")
-DEBUG = os.environ.get("DEBUG", "False") == "True"  # Set to False in production
+DEBUG = os.environ.get("DEBUG", "False") == "True"
 
-# Use '*' to ensure Railway domain is allowed
+# Use '*' for deployment to allow Railway's dynamic domain
 ALLOWED_HOSTS = ['*']
 
 # APPLICATIONS
@@ -18,14 +18,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'whitenoise.runserver_nostatic',  # Optional: helps whitenoise in dev
     'main',
 ]
 
 # MIDDLEWARE
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # MUST be below SecurityMiddleware
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Positions is critical for static files
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -33,11 +32,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
 ]
 
-# URLS & WSGI
 ROOT_URLCONF = 'bharatyatra.urls'
-WSGI_APPLICATION = 'bharatyatra.wsgi.application'
 
-# TEMPLATES
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -54,7 +50,8 @@ TEMPLATES = [
     },
 ]
 
-# DATABASE
+WSGI_APPLICATION = 'bharatyatra.wsgi.application'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -62,12 +59,12 @@ DATABASES = {
     }
 }
 
-# STATIC FILES (Railway & WhiteNoise Config)
+# STATIC FILES (WhiteNoise Configuration)
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# Modern Django 4.2+ Storage Configuration
+# Enables compression and unique hashing for browser caching
 STORAGES = {
     "default": {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
@@ -77,5 +74,4 @@ STORAGES = {
     },
 }
 
-# DEFAULT ID
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
