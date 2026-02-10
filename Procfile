@@ -1,1 +1,1 @@
-web: python manage.py collectstatic --no-input && gunicorn bharatyatra.wsgi:application --bind 0.0.0.0:$PORT
+web: gunicorn bharatyatra.wsgi:application
