@@ -1,1 +1,1 @@
-web: gunicorn bharatyatra.wsgi:application
+web: gunicorn bharatyatra.wsgi
